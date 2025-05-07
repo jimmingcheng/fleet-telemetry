@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+    "time"
 
 	_ "go.uber.org/automaxprocs"
 
@@ -22,6 +23,11 @@ func main() {
 		// logger is not available yet
 		panic(fmt.Sprintf("error=load_service_config value=\"%s\"", err.Error()))
 	}
+
+    if config.StartupDelay > 0 {
+        fmt.Printf("Delaying startup for %d seconds...\n", config.StartupDelay)
+        time.Sleep(time.Duration(config.StartupDelay) * time.Second)
+    }
 
 	if config.Monitoring != nil && config.Monitoring.ProfilingPath != "" {
 		if config.Monitoring.ProfilerFile, err = os.Create(config.Monitoring.ProfilingPath); err != nil {

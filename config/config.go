@@ -106,6 +106,8 @@ type Config struct {
 
 	// MQTT config
 	MQTT *mqtt.Config `json:"mqtt,omitempty"`
+
+    StartupDelay int `json:"startup_delay,omitempty"`
 }
 
 // Airbrake config
